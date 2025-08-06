@@ -26,7 +26,7 @@ Note: I'm still a beginner and this is my first open source project feel free to
 - Full control
 
 ## Use my hosted Version 
-- Quick setup at https://navioverlay.vercel.app
+- Quick setup at [https://navioverlay.vercel.app](https://navioverlay.up.railway.app/)
 - 48-hour link expiry for privacy protection
 - No setup required 
 
