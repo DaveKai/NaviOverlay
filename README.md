@@ -19,7 +19,7 @@ Note: I'm still a beginner and this is my first open source project feel free to
 # Deployment Options
 ## (I highly recommend self-hosting for privacy and security)
 
-##  Self-Host (Recommended)) 
+##  Self-Host (Recommended) 
 - Download and run on your own server/domain
 - Configurable or unlimited link expiry
 - Your data stays on your server
