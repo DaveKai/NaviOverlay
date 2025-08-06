@@ -1,0 +1,122 @@
+:root{
+    --bg-color-main: rgb(0, 0, 0);
+    --bg-color-secondary: rgba(255, 255, 255, 0.042);
+    --bg-color-invert: rgb(255, 255, 255);
+    --bg-hover-invert: rgb(239, 239, 239);
+    --container-bg-color: #80808017;
+    --primary-text: white;
+    --secondary-text: gray;
+    --invert-text: black;
+    --border-color: #80808017;
+    --border-M: 2rem;
+    --border-S: 1rem;
+    --error-color: rgb(200, 0, 0);
+}
+
+a{
+    color: var(--secondary-text);
+}
+
+*::before, *::after, *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Lato;
+    /* outline: 1px solid green; */
+}
+
+body{
+    background-color: var(--bg-color-main);
+    color: var(--primary-text);
+    height: 100dvh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    flex-direction: column;
+}
+
+.loginContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 3rem;
+    background-color: var(--bg-color-secondary);
+    border-radius: var(--border-M);
+    border: 2px solid var(--border-color);
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    height: fit-content;
+    width: fit-content;
+}
+
+.signInLogo{
+    background-color: var(--container-bg-color);
+    padding: 4px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    aspect-ratio: 1 / 1;
+}
+
+#loginWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;                 
+}
+
+#loginWrapper input{
+    all: unset;
+    background-color: var(--container-bg-color);
+    padding: 12px;
+    text-align: left;
+    border-radius: var(--border-S);
+    font-size: 16px;
+    border: 2px solid transparent;
+}
+
+.loginInputs:focus {
+    border: 2px solid var(--border-color) !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+#submitBtn{
+    all: unset;
+    background-color: var(--bg-color-invert);
+    padding: 12px;
+    color: var(--invert-text);
+    font-weight: 600;
+    border-radius: var(--border-S);
+    cursor: pointer;
+    transition: all 250ms ease;
+}
+
+
+#submitBtn:hover{
+    background-color: var(--bg-hover-invert);
+}
+
+#submitBtn:active{
+    transform: scale(95%);
+}
+
+#errorDisplay{
+    position: absolute;
+    top: 2rem;
+    color: var(--error-color);
+    font-weight: 600;
+    display: none;
+}
+
+
+@media screen and (max-width: 520px) {
+    .loginContainer{
+        padding: .8rem;
+    }
+}
