@@ -4,8 +4,5 @@ It's a simple tool for those who want a private way to display what they're list
 
 Note: I'm still a beginner and this is my first open source project feel free to criticize and contribute to the project as much as you want, hope you like it :)
 
-![](./showcase/BE.png)
-![](./showcase/AB.png)
-![](./showcase/TW.png)
-![](./showcase/loginPage.png)
+![](./showcase/Showcase.png)
 
