@@ -1,7 +1,6 @@
 node_modules/
 
 config/tokens.json
-config/nowplaying.json
 
 *.log
 npm-debug.log*
@@ -18,4 +17,5 @@ Thumbs.db
 *.swo
 
 *.tmp
+
 *.temp
