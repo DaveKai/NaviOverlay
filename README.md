@@ -40,7 +40,7 @@ Note: I'm still a beginner and this is my first open source project feel free to
 ## Clone the Repository 
  Clone or download the Repository
 ```bash
-git clone https://github.com/yourusername/navioverlay.git
+git clone https://github.com/DaveKai/NaviOverlay
 cd navioverlay
 ```
 
