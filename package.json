@@ -1,6 +1,6 @@
 {
   "name": "navioverlay",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Now playing overlay for Navidrome music server",
   "main": "navioverlay.js",
   "scripts": {

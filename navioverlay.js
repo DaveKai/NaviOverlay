@@ -29,8 +29,8 @@ if (!fs.existsSync(TOKENS_FILE)) {
 }
 
 // consts for encryption
-const SECRET = 'navioverlay-secret-key';
-const SALT = 'salt';
+const SECRET = process.env.OVERLAY_SECRET || crypto.randomBytes(32).toString('hex');
+const SALT = process.env.OVERLAY_SALT || crypto.randomBytes(16).toString('hex');
 const ALGORITHM = 'aes-256-cbc';
 
 function loadTokens() {
@@ -201,6 +201,71 @@ app.get('/api/token/:tokenId', (req, res) => {
     }
 });
 
+// endpoint for now playing data
+app.get('/api/nowplaying/:tokenId', async (req, res) => {
+    try {
+        const { tokenId } = req.params;
+        
+        const tokensData = cleanExpiredTokens();
+        const token = tokensData.tokens.find(t => t.id === tokenId);
+        
+        if (!token || (token.expires > 0 && Date.now() > token.expires)) {
+            return res.status(401).json({ error: 'Invalid or expired token' });
+        }
+        
+        const credentials = decryptCredentials(token.credentials_encrypted);
+        if (!credentials) {
+            return res.status(500).json({ error: 'Failed to decrypt credentials' });
+        }
+        
+        const naviUrl = `${credentials.serverURL}/rest/getNowPlaying.view?u=${encodeURIComponent(credentials.username)}&p=${encodeURIComponent(credentials.password)}&v=1.16.1&c=NaviOverlay&f=json`;
+        
+        const response = await fetch(naviUrl);
+        const data = await response.json();
+        
+        res.json(data);
+        
+    } catch (error) {
+        console.error('Now playing proxy error:', error);
+        res.status(500).json({ error: 'Failed to fetch now playing data' });
+    }
+});
+
+// endpoint for cover art
+app.get('/api/coverart/:tokenId/:coverArtId', async (req, res) => {
+    try {
+        const { tokenId, coverArtId } = req.params;
+        
+        const tokensData = cleanExpiredTokens();
+        const token = tokensData.tokens.find(t => t.id === tokenId);
+        
+        if (!token || (token.expires > 0 && Date.now() > token.expires)) {
+            return res.status(404).send('Not found');
+        }
+        
+        const credentials = decryptCredentials(token.credentials_encrypted);
+        if (!credentials) {
+            return res.status(404).send('Not found');
+        }
+        
+        const naviUrl = `${credentials.serverURL}/rest/getCoverArt.view?id=${coverArtId}&size=300&u=${encodeURIComponent(credentials.username)}&p=${encodeURIComponent(credentials.password)}&v=1.16.1&c=NaviOverlay`;
+        
+        const response = await fetch(naviUrl);
+        
+        if (response.ok) {
+            res.set('Content-Type', response.headers.get('Content-Type'));
+            const buffer = await response.arrayBuffer();
+            res.send(Buffer.from(buffer));
+        } else {
+            res.status(404).send('Cover art not found');
+        }
+        
+    } catch (error) {
+        console.error('Cover art proxy error:', error);
+        res.status(404).send('Cover art not found');
+    }
+});
+
 // serve overlay page for valid tokens
 app.get('/overlay/:tokenId', (req, res) => {
     const { tokenId } = req.params;
@@ -255,7 +320,7 @@ app.get('/overlay/:tokenId', (req, res) => {
     }
 });
 
-// 
+
 setInterval(() => {
     console.log('Cleaning expired tokens...');
     cleanExpiredTokens();
