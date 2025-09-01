@@ -16,19 +16,13 @@ Note: I'm still a beginner and this is my first open source project feel free to
  - **Multi-user**, each user has their own play counts, playlists, favourites, etc...
  - fully open source and GPLv3-licensed
 
-# Deployment Options
-## (I highly recommend self-hosting for privacy and security)
+# Deployment
 
-##  Self-Host (Recommended) 
+##  Self-Host
 - Download and run on your own server/domain
 - Configurable or unlimited link expiry
 - Your data stays on your server
 - Full control
-
-## Use my hosted Version 
-- https://navioverlay.up.railway.app/
-- 48-hour link expiry for privacy protection
-- No setup required (I still highly don't recommend it)
 
 # Installation Guide
 
